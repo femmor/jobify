@@ -1,7 +1,17 @@
-import LandingPage from './pages/LandingPage';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Dashboard, Error, LandingPage, Register } from './pages';
 
 const App = () => {
-  return <LandingPage />;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/landing" element={<LandingPage />} />
+        <Route path="*" element={<Error />} />
+      </Routes>
+    </BrowserRouter>
+  );
 };
 
 export default App;
