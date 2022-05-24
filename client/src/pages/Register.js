@@ -24,6 +24,10 @@ const Register = () => {
     console.log('submit');
   };
 
+  const toggleMember = () => {
+    setValues({ ...values, isMember: !values.isMember });
+  };
+
   // Destructure values
   const { name, email, password, isMember, showAlert } = values;
 
@@ -35,7 +39,7 @@ const Register = () => {
         {showAlert && <Alert type="success" message="Alert message" />}
         {!isMember && (
           <FormRow
-            name={name}
+            name="name"
             type="text"
             value={name}
             handleChange={handleChange}
@@ -43,22 +47,29 @@ const Register = () => {
           />
         )}
         <FormRow
-          name={email}
+          name="email"
           type="email"
           value={email}
           handleChange={handleChange}
           labelText="Email"
         />
         <FormRow
-          name={password}
+          name="password"
           type="password"
           value={password}
           handleChange={handleChange}
           labelText="Password"
         />
         <button type="submit" className="btn btn-block">
-          Submit
+          {isMember ? 'Login' : 'Register'}
         </button>
+
+        <p>
+          {isMember ? 'Not a member yet?' : 'Already a member?'}
+          <button type="button" onClick={toggleMember} className="member-btn">
+            {isMember ? 'Register' : 'Login'}
+          </button>
+        </p>
       </form>
     </Wrapper>
   );
