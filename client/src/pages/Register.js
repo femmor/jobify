@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useAppContext } from '../context/appContext';
 import { Alert, FormRow, Logo } from '../components';
 import Wrapper from '../assets/wrappers/RegisterPage';
 
@@ -7,10 +8,10 @@ const initialState = {
   email: '',
   password: '',
   isMember: true,
-  showAlert: false,
 };
 
 const Register = () => {
+  const { isLoading, showAlert } = useAppContext();
   const [values, setValues] = useState(initialState);
 
   // global state and useNavigate hook
@@ -29,14 +30,14 @@ const Register = () => {
   };
 
   // Destructure values
-  const { name, email, password, isMember, showAlert } = values;
+  const { name, email, password, isMember } = values;
 
   return (
     <Wrapper className="full-page">
       <form className="form" onSubmit={handleSubmit}>
         <Logo />
         <h3>{isMember ? 'Login' : 'Register'}</h3>
-        {showAlert && <Alert type="success" message="Alert message" />}
+        {showAlert && <Alert alertType="success" alertText="Alert message" />}
         {!isMember && (
           <FormRow
             name="name"
