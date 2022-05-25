@@ -1,15 +1,25 @@
-import { DISPLAY_ALERT } from './actions';
+import { DISPLAY_ALERT, CLEAR_ALERT } from './actions';
 
 const reducer = (state, action) => {
-  if (action.type === DISPLAY_ALERT) {
-    return {
-      ...state,
-      showAlert: true,
-      alertType: 'danger',
-      alertText: 'Please fill in all values!',
-    };
+  switch (action.type) {
+    case DISPLAY_ALERT:
+      return {
+        ...state,
+        showAlert: true,
+        alertType: 'danger',
+        alertText: 'Please fill in all values!',
+      };
+    case CLEAR_ALERT:
+      return {
+        ...state,
+        showAlert: false,
+        alertType: '',
+        alertText: '',
+      };
+
+    default:
+      return state;
   }
-  throw new Error(`No such action ${action.type}`);
 };
 
 export default reducer;
