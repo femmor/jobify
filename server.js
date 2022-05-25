@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import notFoundMiddleware from './middleware/not-found.js';
 import errorHandlerMiddleware from './middleware/error-handler.js';
+import expressAsyncErrors from 'express-async-errors';
 import connectDb from './db/connect.js';
 import authRoutes from './routes/authRoute.js';
 import jobRoutes from './routes/jobRoutes.js';
