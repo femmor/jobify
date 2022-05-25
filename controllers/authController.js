@@ -19,6 +19,7 @@ const register = async (req, res) => {
     email,
     password,
   });
+  user.createJWT();
   res.status(StatusCodes.CREATED).json({ user });
 };
 
