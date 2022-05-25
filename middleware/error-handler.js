@@ -12,6 +12,12 @@ const errorHandlerMiddleware = (err, req, res, next) => {
       .map(item => item.message)
       .join(', ');
   }
+
+  if (err.code && err.code === 11000) {
+    defaultError.statusCode = StatusCodes.BAD_REQUEST;
+    defaultError.message = `${Object.keys(err.keyValue)} has to be unique.`;
+  }
+
   res.status(defaultError.statusCode).json({
     message: defaultError.message,
   });
