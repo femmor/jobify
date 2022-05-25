@@ -15,14 +15,14 @@ app.get('/', (req, res) => {
   res.send('server is working!');
 });
 
+app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/jobs', jobRoutes);
+
 // Middleware
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
-app.use('/api/v1/auth', authRoutes);
-app.use('/api/v1/jobs', jobRoutes);
-
-const PORT = process.env.PORT || 3005;
+const PORT = process.env.PORT || 4000;
 
 const start = async () => {
   try {
