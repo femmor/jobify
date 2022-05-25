@@ -7,26 +7,36 @@ const initialState = {
   name: '',
   email: '',
   password: '',
-  isMember: true,
+  isMember: false,
 };
 
 const Register = () => {
-  const { isLoading, showAlert } = useAppContext();
+  const { isLoading, showAlert, displayAlert } = useAppContext();
   const [values, setValues] = useState(initialState);
 
   // global state and useNavigate hook
 
   const handleChange = e => {
-    console.log(e.target);
+    setValues({ ...values, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log('submit');
+    // Check for input values
+    if (!email || !password || (!isMember && !name)) {
+      displayAlert();
+      return;
+    }
+    console.log(values);
+    clearForm();
   };
 
   const toggleMember = () => {
     setValues({ ...values, isMember: !values.isMember });
+  };
+
+  const clearForm = () => {
+    setValues(initialState);
   };
 
   // Destructure values
