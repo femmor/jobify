@@ -11,7 +11,7 @@ const initialState = {
 };
 
 const Register = () => {
-  const { isLoading, showAlert, displayAlert } = useAppContext();
+  const { isLoading, showAlert, displayAlert, registerUser } = useAppContext();
   const [values, setValues] = useState(initialState);
 
   // global state and useNavigate hook
@@ -27,7 +27,15 @@ const Register = () => {
       displayAlert();
       return;
     }
-    console.log(values);
+    // Set up current user
+    const currentUser = { name, email, password };
+    // Check if user is a member
+    if (isMember) {
+      console.log('Already a member');
+    } else {
+      registerUser(currentUser);
+    }
+
     clearForm();
   };
 
@@ -71,7 +79,7 @@ const Register = () => {
           handleChange={handleChange}
           labelText="Password"
         />
-        <button type="submit" className="btn btn-block">
+        <button type="submit" className="btn btn-block" disabled={isLoading}>
           {isMember ? 'Login' : 'Register'}
         </button>
 
